@@ -47,6 +47,12 @@ BaseIcon.styles = css `
     :host {
       color: inherit;
     }
+
+    svg {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
   `;
 __decorate([
     property({ type: Number, reflect: true })
