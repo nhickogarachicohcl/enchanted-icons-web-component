@@ -46,7 +46,7 @@ export class BaseIcon extends LitElement {
 BaseIcon.styles = css `
     :host {
       color: inherit;
-      display: flex;
+      display: inline-flex;
       align-items: center;
       justify-content: center;
     }
