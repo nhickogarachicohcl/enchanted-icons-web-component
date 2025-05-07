@@ -18,37 +18,57 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
  * See the License for the specific language governing permissions and      *
  * limitations under the License.                                           *
  * ======================================================================== */
-import { css, LitElement } from "lit";
+import { css, LitElement, unsafeCSS } from "lit";
 import { property } from "lit/decorators.js";
 import { DEFAULT_ICON_COLOR, DEFAULT_ICON_SIZE } from "../constants";
 export class BaseIcon extends LitElement {
-    constructor() {
-        super(...arguments);
-        this.size = DEFAULT_ICON_SIZE;
-        this.color = DEFAULT_ICON_COLOR;
+    firstUpdated(changedProperties) {
+        super.firstUpdated(changedProperties);
+        if (this.size !== undefined) {
+            this._applySize();
+        }
+        if (this.color !== undefined) {
+            this._applyColor();
+        }
     }
     updated(changedProperties) {
-        const svgElement = this.shadowRoot?.querySelector('svg');
+        super.updated(changedProperties);
         if (changedProperties.has('size')) {
-            if (svgElement) {
-                svgElement.setAttribute('width', this.size.toString());
-                svgElement.setAttribute('height', this.size.toString());
-            }
+            this._applySize();
         }
         if (changedProperties.has('color')) {
-            if (svgElement) {
-                svgElement.style.fill = this.color;
-                svgElement.style.color = this.color;
-            }
+            this._applyColor();
+        }
+    }
+    _applySize() {
+        if (this.size != null && !isNaN(this.size) && this.size > 0) {
+            this.style.setProperty('--_icon-instance-size', `${this.size}px`);
+        }
+        else {
+            this.style.removeProperty('--_icon-instance-size');
+        }
+    }
+    _applyColor() {
+        if (this.color && this.color.trim() !== "") {
+            this.style.setProperty('--_icon-instance-color', this.color);
+        }
+        else {
+            this.style.removeProperty('--_icon-instance-color');
         }
     }
 }
 BaseIcon.styles = css `
     :host {
-      color: inherit;
       display: inline-flex;
       align-items: center;
       justify-content: center;
+      color: var(--_icon-instance-color, var(--icon-theme-color, ${unsafeCSS(DEFAULT_ICON_COLOR)}));
+    }
+
+    svg {
+      width: var(--_icon-instance-size, var(--icon-theme-size, ${DEFAULT_ICON_SIZE}px));
+      height: var(--_icon-instance-size, var(--icon-theme-size, ${DEFAULT_ICON_SIZE}px));
+      display: block;
     }
   `;
 __decorate([
