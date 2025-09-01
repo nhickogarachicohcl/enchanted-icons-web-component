@@ -12,41 +12,33 @@
  * See the License for the specific language governing permissions and      *
  * limitations under the License.                                           *
  * ======================================================================== */
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
 import { html } from 'lit';
-import { customElement } from 'lit/decorators.js';
-import { createSvgIcon } from '../../../utils';
+import { createSvgIcon, canDefine } from '../../../utils';
 import { BaseIcon } from '../../../utils/base-icon';
 const attrs = {
-    xmlns: 'http://www.w3.org/2000/svg',
-    viewBox: '0 0 32 32',
-    width: 32,
-    height: 32,
+    "xmlns": "http://www.w3.org/2000/svg",
+    "viewBox": "0 0 32 32",
+    "width": 32,
+    "height": 32
 };
 const content = [
     {
-        elem: 'path',
-        attrs: {
-            d: 'M27.6 20.6L24 24.2 24 4 22 4 22 24.2 18.4 20.6 17 22 23 28 29 22zM9 4L3 10 4.4 11.4 8 7.8 8 28 10 28 10 7.8 13.6 11.4 15 10z',
-            fill: 'currentColor',
-            stroke: 'none',
-            strokeLinejoin: 'round',
-            strokeMiterlimit: 10,
-        },
-    },
+        "elem": "path",
+        "attrs": {
+            "d": "M27.6 20.6L24 24.2 24 4 22 4 22 24.2 18.4 20.6 17 22 23 28 29 22zM9 4L3 10 4.4 11.4 8 7.8 8 28 10 28 10 7.8 13.6 11.4 15 10z",
+            "fill": "currentColor",
+            "stroke": "none",
+            "strokeLinejoin": "round",
+            "strokeMiterlimit": "10"
+        }
+    }
 ];
 export const ICON_NAME = 'icon-arrows';
-let WebComponentIcon = class WebComponentIcon extends BaseIcon {
+export class WebComponentIcon extends BaseIcon {
     render() {
         return html `${createSvgIcon(content, attrs)}`;
     }
-};
-WebComponentIcon = __decorate([
-    customElement(ICON_NAME)
-], WebComponentIcon);
-export { WebComponentIcon };
+}
+if (canDefine && !customElements.get(ICON_NAME)) {
+    customElements.define(ICON_NAME, WebComponentIcon);
+}
