@@ -12,44 +12,33 @@
  * See the License for the specific language governing permissions and      *
  * limitations under the License.                                           *
  * ======================================================================== */
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
 import { html } from 'lit';
-import { customElement } from 'lit/decorators.js';
-import { createSvgIcon } from '../../../utils';
+import { createSvgIcon, canDefine } from '../../../utils';
 import { BaseIcon } from '../../../utils/base-icon';
 const attrs = {
-    xmlns: 'http://www.w3.org/2000/svg',
-    viewBox: '0 0 32 32',
-    width: 32,
-    height: 32,
+    "xmlns": "http://www.w3.org/2000/svg",
+    "viewBox": "0 0 32 32",
+    "width": 32,
+    "height": 32
 };
 const content = [
     {
-        elem: 'path',
-        attrs: {
-            d: `M5.7,19.4l8.1,10.3c0.5,0.7,1.4,1.1,2.3,1.1h6.3c2.4,0,4.3-1.9,4.3-4.3V7.3c0-0.9-0.8-1.7-1.7-1.7
-        c-0.9,0-1.7,0.8-1.7,1.7v8.1v-11c0-1.1-0.9-1.9-1.9-1.9s-1.9,0.9-1.9,1.9v9.6v-11c0-1.1-0.9-1.9-1.9-1.9c-1.1,0-1.9,0.9-1.9,1.9
-        v12V5.6c0-1-0.8-1.8-1.8-1.8s-1.8,0.8-1.8,1.8v14.2c0,0.3-0.3,0.4-0.5,0.2l-2.3-3.1c-0.7-1-2.2-1.1-3.1-0.3
-        C5.2,17.3,5,18.5,5.7,19.4z`,
-            fill: 'none',
-            stroke: '#000000',
-            strokeLinejoin: 'round',
-            strokeMiterlimit: 10,
-        },
-    },
+        "elem": "path",
+        "attrs": {
+            "d": "M5.7,19.4l8.1,10.3c0.5,0.7,1.4,1.1,2.3,1.1h6.3c2.4,0,4.3-1.9,4.3-4.3V7.3c0-0.9-0.8-1.7-1.7-1.7         c-0.9,0-1.7,0.8-1.7,1.7v8.1v-11c0-1.1-0.9-1.9-1.9-1.9s-1.9,0.9-1.9,1.9v9.6v-11c0-1.1-0.9-1.9-1.9-1.9c-1.1,0-1.9,0.9-1.9,1.9         v12V5.6c0-1-0.8-1.8-1.8-1.8s-1.8,0.8-1.8,1.8v14.2c0,0.3-0.3,0.4-0.5,0.2l-2.3-3.1c-0.7-1-2.2-1.1-3.1-0.3         C5.2,17.3,5,18.5,5.7,19.4z",
+            "fill": "none",
+            "stroke": "#000000",
+            "strokeLinejoin": "round",
+            "strokeMiterlimit": "10"
+        }
+    }
 ];
 export const ICON_NAME = 'icon-hand-raise';
-let WebComponentIcon = class WebComponentIcon extends BaseIcon {
+export class WebComponentIcon extends BaseIcon {
     render() {
         return html `${createSvgIcon(content, attrs)}`;
     }
-};
-WebComponentIcon = __decorate([
-    customElement(ICON_NAME)
-], WebComponentIcon);
-export { WebComponentIcon };
+}
+if (canDefine && !customElements.get(ICON_NAME)) {
+    customElements.define(ICON_NAME, WebComponentIcon);
+}

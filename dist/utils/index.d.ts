@@ -11,4 +11,5 @@ export interface IIconAttrs {
     height: number;
 }
 declare const createSvgIcon: (content: IIconContent[], attrs: IIconAttrs) => SVGSVGElement;
-export { createSvgIcon, };
+declare const canDefine: boolean;
+export { createSvgIcon, canDefine };

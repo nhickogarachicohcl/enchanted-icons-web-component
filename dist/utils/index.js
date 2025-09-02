@@ -41,4 +41,5 @@ const createSvgIcon = (content, attrs) => {
     });
     return svgElement;
 };
-export { createSvgIcon, };
+const canDefine = typeof globalThis !== 'undefined' && 'customElements' in globalThis;
+export { createSvgIcon, canDefine };
